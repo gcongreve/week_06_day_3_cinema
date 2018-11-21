@@ -10,6 +10,8 @@ Cinema.prototype.filmTitles = function(){
   return titles;
 }
 
+
+//find = filter but just for first thing.
 Cinema.prototype.findByTitle = function(title){
   const result = this.films.filter((film) => {
     if (film.title === title) {
@@ -19,14 +21,14 @@ Cinema.prototype.findByTitle = function(title){
   return result;
 };
 
-// Cinema.prototype.findByGenre = function(genre){
-//   const result = this.films.filter((film) => {
-//     if (film.genre === genre) {
-//       return film
-//     }
-//   });
-//   return result;
-// };
+Cinema.prototype.findByGenre = function(genre){
+  const result = this.films.filter((film) => {
+    if (film.genre === genre) {
+      return film
+    }
+  });
+  return result;
+};
 
 Cinema.prototype.filmYears = function(){
   const years = this.films.map((film) => {
@@ -36,11 +38,15 @@ Cinema.prototype.filmYears = function(){
   return years;
 };
 
+
+//use some instead of map / includes
 Cinema.prototype.filmFromYear = function(year){
   const filmYears = this.filmYears();
   return filmYears.includes(year);
 };
 
+
+//use every for this instead of this.
 Cinema.prototype.filmLength = function(duration){
   const longFilms = this.films.filter((film) => {
     if (film.length >= duration){
@@ -58,11 +64,6 @@ Cinema.prototype.filmTimes = function(){
   return times;
 };
 
-// Cinema.prototype.totalTime = function(){
-//   let total = 0;
-//    for (film){}
-// };
-
 
 Cinema.prototype.totalTime = function(){
     const total = this.filmTimes().reduce((accum, time) => {
@@ -73,7 +74,7 @@ Cinema.prototype.totalTime = function(){
 
 Cinema.prototype.findByProperty = function(property, value){
   const result = this.films.filter((film) => {
-    if (film.property === value) {
+    if (film[property] === value) {
       return film;
     }
 });
